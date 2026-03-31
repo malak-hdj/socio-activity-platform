@@ -37,15 +37,7 @@ export default function Login() {
           }}
         />
 
-        {/* Top badge */}
-        <div className="absolute top-8 left-8">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.18)] backdrop-blur-[6px] border border-[rgba(255,255,255,0.22)]">
-            <div className="w-2 h-2 rounded-full bg-[#ED8D31]" />
-            <span className="text-white text-sm font-medium">
-              Employee Access Portal
-            </span>
-          </div>
-        </div>
+
 
         {/* Bottom content */}
         <div className="relative z-10 p-10 pb-12">
