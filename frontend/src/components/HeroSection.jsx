@@ -9,7 +9,7 @@ const heroImages = [hero1, hero2, hero3];
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
 
-  // 🔁 Auto change
+  // 🔁 Auto change//
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % heroImages.length);
