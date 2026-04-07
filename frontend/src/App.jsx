@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import Login from "./pages/Login";
 import ActivityDetail from "./pages/ActivityDetail";
-import Documents from "./pages/Documents";
+import Documents from "./pages/Dashboard/Documents";
 function App() {
   return (
     <BrowserRouter>
@@ -12,7 +12,8 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/activities/:slug" element={<ActivityDetail />} />
-        <Route path="/documents" element={<Documents />} />
+        <Route path="/dashboard/documents" element={<Documents />} />
+        {/* <Route path="/dashboard/draws" element={<DrawResults />} /> */}
       </Routes>
     </BrowserRouter>
   );
