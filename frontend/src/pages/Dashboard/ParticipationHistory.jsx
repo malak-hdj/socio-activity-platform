@@ -60,10 +60,10 @@ const historyItems = [
 ];
 
 const tabs = [
-  { key: "all", label: "All History", count: 14 },
-  { key: "Trips & Excursions", label: "Trips & Excursions", count: 6 },
-  { key: "Events", label: "Events", count: 5 },
-  { key: "Trainings", label: "Trainings", count: 3 },
+  { key: "all", label: "All History", count: 5 },
+  { key: "Trips & Excursions", label: "Trips & Excursions", count: 2 },
+  { key: "Events", label: "Events", count: 2 },
+  { key: "Trainings", label: "Trainings", count: 1 },
 ];
 
 const years = ["All Time", "2024", "2023", "2022"];
