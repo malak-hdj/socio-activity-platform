@@ -60,7 +60,7 @@ const historyItems = [
 ];
 
 const tabs = [
-  { key: "all", label: "All History", count: 14 },
+  { key: "all", label: "All History", count: 5 },
   { key: "Trips & Excursions", label: "Trips & Excursions", count: 6 },
   { key: "Events", label: "Events", count: 5 },
   { key: "Trainings", label: "Trainings", count: 3 },
