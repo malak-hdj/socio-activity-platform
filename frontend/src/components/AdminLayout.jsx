@@ -1,8 +1,8 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { employeeLinks } from "../data/navLinks";
+import { employeeLinks, adminLinks } from "../data/navLinks";
 
-export default function DashboardLayout({ children }) {
+export default function AdminLayout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -10,6 +10,8 @@ export default function DashboardLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-[#F7F7F5]">
+
+      {/* Navbar */}
       <div className="flex justify-center px-4 pt-[18px] pb-0 relative z-10">
         <nav className="flex w-full max-w-[1440px] min-h-[74px] px-5 py-[13px] justify-between items-center rounded-[22px] border border-[rgba(229,226,220,0.92)] bg-[rgba(255,255,255,0.82)] backdrop-blur-[5px]">
           <div onClick={() => navigate("/")} className="flex items-center gap-3 cursor-pointer">
@@ -18,7 +20,7 @@ export default function DashboardLayout({ children }) {
           </div>
           <div className="hidden md:flex flex-1 max-w-[380px] mx-6 h-[40px] items-center gap-2 px-4 rounded-full border border-[#E5E2DC] bg-white">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A8088" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input className="flex-1 text-sm outline-none bg-transparent placeholder:text-[#7A8088]" placeholder="Search activities, announcements..." />
+            <input className="flex-1 text-sm outline-none bg-transparent placeholder:text-[#7A8088]" placeholder="Search activities, draws, reports..." />
           </div>
           <div className="flex items-center gap-3">
             <div className="flex p-1 items-center gap-1 rounded-full border border-[#E5E2DC] bg-white">
@@ -31,30 +33,73 @@ export default function DashboardLayout({ children }) {
             <div className="flex items-center gap-2">
               <div className="hidden md:flex flex-col items-end">
                 <span className="text-[#2F343B] text-sm font-semibold leading-tight">{user?.name ?? "Ahmed K."}</span>
-                <span className="text-[#7A8088] text-xs">Employee</span>
+                <span className="text-[10px] font-semibold text-[#ED8D31]">Functional Admin</span>
               </div>
-              <div onClick={() => { logout(); navigate("/login"); }} className="w-[38px] h-[38px] rounded-full bg-[#ED8D31] flex items-center justify-center text-white font-bold text-sm cursor-pointer hover:opacity-90 transition-opacity" title="Logout">
+              <div onClick={() => { logout(); navigate("/login"); }} className="w-[38px] h-[38px] rounded-full bg-[#ED8D31] flex items-center justify-center text-white font-bold text-sm cursor-pointer hover:opacity-90 transition-opacity border-2 border-[#ED8D31]" title="Logout">
                 {user?.initials ?? "AK"}
               </div>
             </div>
           </div>
         </nav>
       </div>
+
+      {/* Body */}
       <div className="flex justify-center px-4 py-8">
         <div className="w-full max-w-[1440px] flex gap-8">
-          <aside className="hidden lg:flex flex-col w-[210px] shrink-0 pt-1 gap-0.5">
-            {employeeLinks.map((link) => (
-              <Link key={link.label} to={link.to}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-[12px] text-sm font-medium transition-colors ${isActive(link.to) ? "bg-[#ED8D31] text-white" : "text-[#7A8088] hover:text-[#2F343B] hover:bg-white"}`}
-              >
-                {link.label}
-                {link.badge && <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isActive(link.to) ? "bg-white/30 text-white" : "bg-[#ED8D31] text-white"}`}>{link.badge}</span>}
-              </Link>
-            ))}
+
+          {/* Sidebar */}
+          <aside className="hidden lg:flex flex-col w-[210px] shrink-0 pt-1 gap-4">
+
+            {/* Employee space */}
+            <div>
+              <p className="text-[10px] font-bold text-[#7A8088] uppercase tracking-widest px-3 mb-2">Employee space</p>
+              <div className="flex flex-col gap-0.5">
+                {employeeLinks.map((link) => (
+                  <Link key={link.label} to={link.to}
+                    className={`flex items-center justify-between px-3 py-2.5 rounded-[12px] text-sm font-medium transition-colors ${
+                      isActive(link.to) ? "bg-[#2F343B] text-white" : "text-[#7A8088] hover:text-[#2F343B] hover:bg-white"
+                    }`}
+                  >
+                    {link.label}
+                    {link.badge && <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${isActive(link.to) ? "bg-white/20 text-white" : "bg-[#F0EFED] text-[#7A8088]"}`}>{link.badge}</span>}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-[#E5E2DC]" />
+
+            {/* Admin tools */}
+            <div>
+              <p className="text-[10px] font-bold text-[#ED8D31] uppercase tracking-widest px-3 mb-2">Admin tools</p>
+              <div className="flex flex-col gap-0.5">
+                {adminLinks.map((link) => (
+                  <Link key={link.label} to={link.to}
+                    className={`flex items-center justify-between px-3 py-2.5 rounded-[12px] text-sm font-medium transition-colors ${
+                      isActive(link.to) ? "bg-[#ED8D31] text-white" : "text-[#7A8088] hover:text-[#2F343B] hover:bg-white"
+                    }`}
+                  >
+                    {link.label}
+                    {link.badge && <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${isActive(link.to) ? "bg-white/30 text-white" : "bg-[#FFF3E8] text-[#ED8D31]"}`}>{link.badge}</span>}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Connected role card */}
+            <div className="rounded-[16px] border border-[#E5E2DC] bg-white p-4">
+              <p className="text-[11px] text-[#7A8088] mb-0.5">Connected role</p>
+              <p className="text-[13px] font-bold text-[#2F343B] mb-2">Employee + Functional Admin</p>
+              <p className="text-[11px] text-[#7A8088] leading-[160%]">You keep access to your personal employee tools while managing activities, quotas, draws, withdrawals, and reporting.</p>
+            </div>
+
           </aside>
+
           <main className="flex-1 min-w-0">{children}</main>
         </div>
       </div>
+
+      {/* Footer */}
       <div className="flex justify-center px-4 pt-2 pb-6">
         <div className="w-full max-w-[1440px] flex justify-between items-center border-t border-[#E5E2DC] pt-5">
           <div className="text-[#7A8088] text-sm">© 2026 SONATRACH. All rights reserved.</div>

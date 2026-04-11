@@ -3,10 +3,13 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import Login from "./pages/Login";
 import ActivityDetail from "./pages/ActivityDetail";
+//employé
 import Documents from "./pages/Dashboard/Documents";
 import ParticipationHistory from "./pages/Dashboard/ParticipationHistory";
 import Surveys from "./pages/Dashboard/Surveys";
 import IdeaBox from "./pages/Dashboard/IdeaBox";
+//admin
+import ManageActivities from "./pages/DashboardAdmin/ManageActivities";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +22,8 @@ function App() {
         <Route path="/dashboard/history" element={<ParticipationHistory />} />
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
+        <Route path="/DashboardAdmin/activities" element={<ManageActivities />} />
+
         {/* <Route path="/dashboard/draws" element={<DrawResults />} /> */}
       </Routes>
     </BrowserRouter>
