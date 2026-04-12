@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 
 const historyItems = [
   {
@@ -221,7 +221,7 @@ export default function ParticipationHistory() {
   });
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
@@ -317,6 +317,6 @@ export default function ParticipationHistory() {
           ))
         )}
       </div>
-    </DashboardLayout>
+    </AppLayout>
   );
 }

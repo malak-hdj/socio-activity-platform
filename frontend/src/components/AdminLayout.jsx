@@ -6,6 +6,11 @@ export default function AdminLayout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  const getAdminEmployeePath = (to) => {
+    if (to === "/dashboard") return "/dashboardadmin/activities";
+    if (to.startsWith("/dashboard/")) return to.replace("/dashboard/", "/dashboardadmin/");
+    return to;
+  };
   const isActive = (to) => location.pathname === to;
 
   return (
@@ -55,13 +60,13 @@ export default function AdminLayout({ children }) {
               <p className="text-[10px] font-bold text-[#7A8088] uppercase tracking-widest px-3 mb-2">Employee space</p>
               <div className="flex flex-col gap-0.5">
                 {employeeLinks.map((link) => (
-                  <Link key={link.label} to={link.to}
+                  <Link key={link.label} to={getAdminEmployeePath(link.to)}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-[12px] text-sm font-medium transition-colors ${
-                      isActive(link.to) ? "bg-[#2F343B] text-white" : "text-[#7A8088] hover:text-[#2F343B] hover:bg-white"
+                      isActive(getAdminEmployeePath(link.to)) ? "bg-[#2F343B] text-white" : "text-[#7A8088] hover:text-[#2F343B] hover:bg-white"
                     }`}
                   >
                     {link.label}
-                    {link.badge && <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${isActive(link.to) ? "bg-white/20 text-white" : "bg-[#F0EFED] text-[#7A8088]"}`}>{link.badge}</span>}
+                    {link.badge && <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${isActive(getAdminEmployeePath(link.to)) ? "bg-white/20 text-white" : "bg-[#F0EFED] text-[#7A8088]"}`}>{link.badge}</span>}
                   </Link>
                 ))}
               </div>

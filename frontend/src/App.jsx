@@ -22,7 +22,11 @@ function App() {
         <Route path="/dashboard/history" element={<ParticipationHistory />} />
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
-        <Route path="/DashboardAdmin/activities" element={<ManageActivities />} />
+        <Route path="/dashboardadmin/documents" element={<Documents />} />
+        <Route path="/dashboardadmin/history" element={<ParticipationHistory />} />
+        <Route path="/dashboardadmin/surveys" element={<Surveys />} />
+        <Route path="/dashboardadmin/ideas" element={<IdeaBox />} />
+        <Route path="/dashboardadmin/activities" element={<ManageActivities />} />
 
         {/* <Route path="/dashboard/draws" element={<DrawResults />} /> */}
       </Routes>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 
 const categoryOptions = [
   "Activities",
@@ -163,7 +163,7 @@ export default function IdeaBox() {
   ];
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       <section>
         <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -325,6 +325,6 @@ export default function IdeaBox() {
           </div>
         </div>
       </section>
-    </DashboardLayout>
+    </AppLayout>
   );
 }

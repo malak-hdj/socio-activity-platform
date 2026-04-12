@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 
 const tabs = [
   { id: "active", label: "Active", count: 3 },
@@ -238,7 +238,7 @@ export default function Surveys() {
   }, [activeTab, search]);
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       <section>
         <div className="mb-6">
           <h1 className="mb-1 text-[36px] font-extrabold leading-tight tracking-[-0.03em] text-[#2F343B]">
@@ -310,6 +310,6 @@ export default function Surveys() {
           </div>
         )}
       </section>
-    </DashboardLayout>
+    </AppLayout>
   );
 }
