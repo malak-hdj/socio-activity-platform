@@ -12,7 +12,6 @@ export const employeeLinks = [
 
 export const adminLinks = [
   { label: "Manage Activities",     to: "/dashboardadmin/activities" },
-  { label: "Sessions & Quotas",     to: "/admin/sessions" },
   { label: "Manage Registrations",  to: "/admin/registrations" },
   { label: "Launch Draw",           to: "/admin/draw" },
   { label: "Withdrawals",           to: "/admin/withdrawals", badge: 4 },
