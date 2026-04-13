@@ -241,10 +241,10 @@ export default function Surveys() {
     <AppLayout>
       <section>
         <div className="mb-6">
-          <h1 className="mb-1 text-[36px] font-extrabold leading-tight tracking-[-0.03em] text-[#2F343B]">
+          <h1 className="mb-1 text-[32px] font-extrabold leading-tight tracking-[-0.03em] text-[#2F343B]">
             Surveys &amp; Feedback
           </h1>
-          <p className="text-base text-[#7A8088]">
+          <p className="text-sm text-[#7A8088]">
             Participate in internal company surveys, share your opinions, and help us improve the workplace.
           </p>
         </div>
@@ -258,7 +258,7 @@ export default function Surveys() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`inline-flex h-11 items-center gap-2 border-b-2 pb-2 text-lg transition-colors ${
+                  className={`inline-flex h-11 items-center gap-2 border-b-2 pb-2 text-sm transition-colors ${
                     isActive
                       ? "border-[#ED8D31] font-semibold text-[#2F343B]"
                       : "border-transparent text-[#7A8088] hover:text-[#4D5560]"
@@ -278,7 +278,7 @@ export default function Surveys() {
           </div>
 
           <div className="mb-3 ml-auto flex w-full flex-wrap items-center gap-3 md:w-auto">
-            <label className="flex h-11 min-w-[220px] flex-1 items-center gap-2 rounded-[10px] border border-[#E4E4E1] bg-white px-3 text-[#9CA1A9] md:flex-none">
+            <label className="flex h-11 min-w-[220px] flex-1 items-center gap-2 rounded-full border border-[#E4E4E1] bg-white px-3 text-[#9CA1A9] md:flex-none">
               <Icon name="search" className="h-4 w-4" />
               <input
                 type="text"
@@ -290,7 +290,7 @@ export default function Surveys() {
             </label>
             <button
               type="button"
-              className="inline-flex h-11 items-center gap-2 rounded-[10px] border border-[#E4E4E1] bg-white px-4 text-sm font-semibold text-[#4D5560] hover:bg-[#F2F2F0]"
+              className="inline-flex h-11 items-center gap-2 rounded-full border border-[#E4E4E1] bg-white px-4 text-sm font-semibold text-[#4D5560] hover:bg-[#F2F2F0]"
             >
               <Icon name="filter" className="h-4 w-4" />
               Filter

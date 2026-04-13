@@ -2,7 +2,6 @@
 
 export const employeeLinks = [
   { label: "Dashboard",             to: "/dashboard" },
-  { label: "Activities Catalog",    to: "/catalog" },
   { label: "My Requests",           to: "/dashboard/requests",  badge: 3 },
   { label: "Draw Results",          to: "/dashboard/draws" },
   { label: "Documents",             to: "/dashboard/documents" },
@@ -13,7 +12,7 @@ export const employeeLinks = [
 
 export const adminLinks = [
   { label: "Manage Activities",     to: "/dashboardadmin/activities" },
-  { label: "Sessions & Quotas",     to: "/admin/sessions" },
+  { label: "Manage Sites",     to: "/dashboardadmin/sites" },
   { label: "Manage Registrations",  to: "/admin/registrations" },
   { label: "Launch Draw",           to: "/admin/draw" },
   { label: "Withdrawals",           to: "/admin/withdrawals", badge: 4 },
