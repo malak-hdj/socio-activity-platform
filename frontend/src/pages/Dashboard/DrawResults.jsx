@@ -16,6 +16,7 @@ const drawResults = [
     ctaStyle: "orange",
     icon: "travel",
     borderColor: "#2F8C57",
+    year: 2024,
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ const drawResults = [
     ctaStyle: "ghost",
     icon: "camp",
     borderColor: "#ED8D31",
+    year: 2024,
   },
   {
     id: 3,
@@ -44,12 +46,13 @@ const drawResults = [
     ctaStyle: "ghost",
     icon: "event",
     borderColor: "#D92D20",
+    year: 2024,
   },
   {
     id: 4,
     title: "Language Training Program",
-    drawDate: "Jul 15, 2024",
-    session: "Q3 2024",
+    drawDate: "Jul 15, 2023",
+    session: "Q3 2023",
     participants: "1 Participant",
     status: "accepted",
     statusLabel: "Accepted",
@@ -58,6 +61,37 @@ const drawResults = [
     ctaStyle: "ghost",
     icon: "training",
     borderColor: "#2F8C57",
+    year: 2023,
+  },
+  {
+    id: 5,
+    title: "Summer Family Stay - Bejaia",
+    drawDate: "Jun 10, 2023",
+    session: "Summer 2023",
+    participants: "2 Participants",
+    status: "waitlisted",
+    statusLabel: "Waitlisted",
+    sub: "Position: #7",
+    cta: "View Details",
+    ctaStyle: "ghost",
+    icon: "travel",
+    borderColor: "#ED8D31",
+    year: 2023,
+  },
+  {
+    id: 6,
+    title: "Annual Gala 2022",
+    drawDate: "Nov 05, 2022",
+    session: "Annual 2022",
+    participants: "1 Participant",
+    status: "accepted",
+    statusLabel: "Accepted",
+    sub: "Dossier Completed",
+    cta: "View Details",
+    ctaStyle: "ghost",
+    icon: "event",
+    borderColor: "#2F8C57",
+    year: 2022,
   },
 ];
 
@@ -113,8 +147,8 @@ export default function DrawResults() {
 
   const filtered = drawResults.filter((r) => {
     const matchSearch = r.title.toLowerCase().includes(search.toLowerCase());
-    // Pour l'instant toutes les données sont 2024
-    return matchSearch;
+    const matchYear = activeYear === "All Time" || r.year === parseInt(activeYear);
+    return matchSearch && matchYear;
   });
 
   return (
