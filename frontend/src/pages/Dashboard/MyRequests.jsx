@@ -187,8 +187,8 @@ export default function MyRequests() {
     <AppLayout>
       <section>
         <div className="mb-6">
-          <h1 className="text-[40px] font-extrabold leading-tight tracking-[-0.02em] text-[#2F343B]">My Requests</h1>
-          <p className="mt-1 text-base text-[#7A8088]">Track the status of your applications and manage your submitted requests.</p>
+          <h1 className="text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-[#2F343B]">My Requests</h1>
+          <p className="mt-1 text-sm text-[#7A8088]">Track the status of your applications and manage your submitted requests.</p>
         </div>
 
         <div className="mb-5 flex flex-col gap-3 border-b border-[#E4E4E1] pb-3 lg:flex-row lg:items-center lg:justify-between">
@@ -200,7 +200,7 @@ export default function MyRequests() {
                   key={tab.key}
                   type="button"
                   onClick={() => setActiveTab(tab.key)}
-                  className={`inline-flex items-center gap-2 border-b-2 pb-2 text-lg transition-colors ${
+                  className={`inline-flex items-center gap-2 border-b-2 pb-2 text-sm font-medium transition-colors ${
                     isActive
                       ? "border-[#ED8D31] font-semibold text-[#2F343B]"
                       : "border-transparent text-[#7A8088] hover:text-[#4D5560]"
@@ -219,8 +219,8 @@ export default function MyRequests() {
             })}
           </div>
 
-          <div className="flex w-full flex-wrap items-center gap-3 lg:w-auto">
-            <label className="flex h-11 min-w-[240px] flex-1 items-center gap-2 rounded-[10px] border border-[#E4E4E1] bg-white px-3 text-[#9CA1A9] lg:flex-none">
+          <div className="flex items-center gap-3">
+            <label className="flex h-9 min-w-[200px] items-center gap-2 rounded-full border border-[#E4E4E1] bg-white px-3 text-[#9CA1A9]">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
                 <path d="M20 20L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -230,12 +230,12 @@ export default function MyRequests() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search requests..."
-                className="w-full bg-transparent text-sm text-[#2F343B] outline-none placeholder:text-[#9CA1A9]"
+                className="w-full bg-transparent text-xs text-[#2F343B] outline-none placeholder:text-[#9CA1A9]"
               />
             </label>
             <button
               type="button"
-              className="inline-flex h-11 items-center gap-2 rounded-[10px] border border-[#E4E4E1] bg-white px-4 text-sm font-semibold text-[#4D5560] hover:bg-[#F2F2F0]"
+              className="inline-flex h-9 items-center gap-2 rounded-full border border-[#E4E4E1] bg-white px-2 text-xs font-semibold text-[#4D5560] hover:bg-[#F2F2F0]"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 7H20M7.5 12H16.5M10 17H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
