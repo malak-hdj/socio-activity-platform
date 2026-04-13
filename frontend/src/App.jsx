@@ -8,6 +8,7 @@ import Documents from "./pages/Dashboard/Documents";
 import ParticipationHistory from "./pages/Dashboard/ParticipationHistory";
 import Surveys from "./pages/Dashboard/Surveys";
 import IdeaBox from "./pages/Dashboard/IdeaBox";
+import DrawResults from "./pages/Dashboard/DrawResults";    
 //admin
 import ManageActivities from "./pages/DashboardAdmin/ManageActivities";
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dashboard/history" element={<ParticipationHistory />} />
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
+        <Route path="/dashboard/draws" element={<DrawResults />} />  
         <Route path="/dashboardadmin/documents" element={<Documents />} />
         <Route path="/dashboardadmin/history" element={<ParticipationHistory />} />
         <Route path="/dashboardadmin/surveys" element={<Surveys />} />
