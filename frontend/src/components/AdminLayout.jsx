@@ -7,7 +7,7 @@ export default function AdminLayout({ children }) {
   const location = useLocation();
   const { user, logout } = useAuth();
   const getAdminEmployeePath = (to) => {
-    if (to === "/dashboard") return "/dashboardadmin/activities";
+    if (to === "/dashboard") return "/dashboardadmin";
     if (to.startsWith("/dashboard/")) return to.replace("/dashboard/", "/dashboardadmin/");
     return to;
   };
