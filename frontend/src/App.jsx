@@ -6,6 +6,7 @@ import ActivityDetail from "./pages/ActivityDetail";
 //employé
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Documents from "./pages/Dashboard/Documents";
+import MyRequests from "./pages/Dashboard/MyRequests";
 import ParticipationHistory from "./pages/Dashboard/ParticipationHistory";
 import Surveys from "./pages/Dashboard/Surveys";
 import IdeaBox from "./pages/Dashboard/IdeaBox";
@@ -23,10 +24,12 @@ function App() {
         <Route path="/activities/:slug" element={<ActivityDetail />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboardadmin" element={<Dashboard />} />
+        <Route path="/dashboard/requests" element={<MyRequests />} />
         <Route path="/dashboard/documents" element={<Documents />} />
         <Route path="/dashboard/history" element={<ParticipationHistory />} />
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
+        <Route path="/dashboardadmin/requests" element={<MyRequests />} />
         <Route path="/dashboardadmin/documents" element={<Documents />} />
         <Route path="/dashboardadmin/history" element={<ParticipationHistory />} />
         <Route path="/dashboardadmin/surveys" element={<Surveys />} />
