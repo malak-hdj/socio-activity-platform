@@ -30,6 +30,8 @@ function App() {
         <Route path="/dashboard/history" element={<ParticipationHistory />} />
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
+        <Route path="/dashboard/draws" element={<DrawResults />} />
+        //admin
         <Route path="/dashboardadmin/requests" element={<MyRequests />} />
         <Route path="/dashboardadmin/documents" element={<Documents />} />
         <Route path="/dashboardadmin/history" element={<ParticipationHistory />} />
