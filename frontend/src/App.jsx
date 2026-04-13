@@ -11,6 +11,8 @@ import Surveys from "./pages/Dashboard/Surveys";
 import IdeaBox from "./pages/Dashboard/IdeaBox";
 //admin
 import ManageActivities from "./pages/DashboardAdmin/ManageActivities";
+import LaunchDraw from "./pages/DashboardAdmin/LaunchDraw";
+import ManageRegistrations from "./pages/DashboardAdmin/ManageRegistrations";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,10 @@ function App() {
         <Route path="/dashboardadmin/surveys" element={<Surveys />} />
         <Route path="/dashboardadmin/ideas" element={<IdeaBox />} />
         <Route path="/dashboardadmin/activities" element={<ManageActivities />} />
+        <Route path="/admin/draw" element={<LaunchDraw />} />
+        <Route path="/dashboardadmin/draw" element={<LaunchDraw />} />
+        <Route path="/admin/registrations" element={<ManageRegistrations />} />
+        <Route path="/dashboardadmin/registrations" element={<ManageRegistrations />} />
 
         {/* <Route path="/dashboard/draws" element={<DrawResults />} /> */}
       </Routes>

@@ -2,7 +2,6 @@
 
 export const employeeLinks = [
   { label: "Dashboard",             to: "/dashboard" },
-  { label: "Activities Catalog",    to: "/catalog" },
   { label: "My Requests",           to: "/dashboard/requests",  badge: 3 },
   { label: "Draw Results",          to: "/dashboard/draws" },
   { label: "Documents",             to: "/dashboard/documents" },
