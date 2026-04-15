@@ -15,6 +15,7 @@ import DrawResults from "./pages/Dashboard/DrawResults";
 import ManageActivities from "./pages/DashboardAdmin/ManageActivities";
 import LaunchDraw from "./pages/DashboardAdmin/LaunchDraw";
 import ManageRegistrations from "./pages/DashboardAdmin/ManageRegistrations";
+import ManageSites from "./pages/DashboardAdmin/ManageSites";
 function App() {
   return (
     <BrowserRouter>
@@ -31,17 +32,19 @@ function App() {
         <Route path="/dashboard/surveys" element={<Surveys />} />
         <Route path="/dashboard/ideas" element={<IdeaBox />} />
         <Route path="/dashboard/draws" element={<DrawResults />} />
-        //admin
+        {/* admin */}
         <Route path="/dashboardadmin/requests" element={<MyRequests />} />
         <Route path="/dashboardadmin/documents" element={<Documents />} />
         <Route path="/dashboardadmin/history" element={<ParticipationHistory />} />
         <Route path="/dashboardadmin/surveys" element={<Surveys />} />
         <Route path="/dashboardadmin/ideas" element={<IdeaBox />} />
         <Route path="/dashboardadmin/activities" element={<ManageActivities />} />
+        <Route path="/dashboardadmin/sites" element={<ManageSites />} />
         <Route path="/admin/draw" element={<LaunchDraw />} />
         <Route path="/dashboardadmin/draw" element={<LaunchDraw />} />
         <Route path="/admin/registrations" element={<ManageRegistrations />} />
         <Route path="/dashboardadmin/registrations" element={<ManageRegistrations />} />
+        <Route path="/admin/sites" element={<ManageSites />} />
 
         {/* <Route path="/dashboard/draws" element={<DrawResults />} /> */}
       </Routes>
