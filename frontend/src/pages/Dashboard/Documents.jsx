@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 const initialDocs = [
   {
     id: 1,
@@ -178,7 +178,7 @@ export default function Documents() {
   ];
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-[#2F343B] text-[32px] font-extrabold tracking-[-1px] leading-tight">Documents</h1>
@@ -241,6 +241,6 @@ export default function Documents() {
           onConfirm={handleUploadConfirm}
         />
       )}
-    </DashboardLayout>
+    </AppLayout>
   );
 }

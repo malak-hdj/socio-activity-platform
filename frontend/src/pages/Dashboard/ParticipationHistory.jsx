@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 
 const historyItems = [
   {
@@ -60,10 +60,10 @@ const historyItems = [
 ];
 
 const tabs = [
-  { key: "all", label: "All History", count: 14 },
-  { key: "Trips & Excursions", label: "Trips & Excursions", count: 6 },
-  { key: "Events", label: "Events", count: 5 },
-  { key: "Trainings", label: "Trainings", count: 3 },
+  { key: "all", label: "All History", count: 5 },
+  { key: "Trips & Excursions", label: "Trips & Excursions", count: 2 },
+  { key: "Events", label: "Events", count: 2 },
+  { key: "Trainings", label: "Trainings", count: 1 },
 ];
 
 const years = ["All Time", "2024", "2023", "2022"];
@@ -221,7 +221,7 @@ export default function ParticipationHistory() {
   });
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
@@ -317,6 +317,6 @@ export default function ParticipationHistory() {
           ))
         )}
       </div>
-    </DashboardLayout>
+    </AppLayout>
   );
 }

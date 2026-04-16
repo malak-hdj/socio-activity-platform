@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import AppLayout from "../../components/AppLayout";
 
 const categoryOptions = [
   "Activities",
@@ -163,11 +163,11 @@ export default function IdeaBox() {
   ];
 
   return (
-    <DashboardLayout>
+    <AppLayout>
       <section>
         <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-[34px] font-extrabold tracking-[-0.03em] text-[#2F343B]">Idea Box</h1>
+            <h1 className="text-[32px] font-extrabold tracking-[-0.03em] text-[#2F343B]">Idea Box</h1>
             <p className="mt-1 text-sm text-[#7A8088]">
               Submit your ideas anonymously to the administration and keep track of the ideas you have already sent.
             </p>
@@ -325,6 +325,6 @@ export default function IdeaBox() {
           </div>
         </div>
       </section>
-    </DashboardLayout>
+    </AppLayout>
   );
 }
