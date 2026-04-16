@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { activities } from "../data/activities";
+import { useState, useEffect } from "react";
+import { activites as activitiesAPI } from "../services/api";
+import { activities as defaultActivities } from "../data/activities";
 
 const ArrowIcon = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -63,6 +65,41 @@ function ActivityCard({ activity, tall = false }) {
 }
 
 export default function ActivitiesSection() {
+  const [activities, setActivities] = useState(defaultActivities);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const data = await activitiesAPI.getAll();
+        console.log('API Response:', data);
+        
+        if (Array.isArray(data) && data.length > 0) {
+          // Transform API data to match component format
+          const transformed = data.map((item) => ({
+            title: item.titre || 'Untitled',
+            slug: (item.titre || '').toLowerCase().replace(/\s+/g, "-"),
+            category: item.categorie || 'Uncategorized',
+            shortDescription: item.description || 'No description',
+            image: item.image || "https://via.placeholder.com/400x300?text=" + (item.titre || 'Activity'),
+          }));
+          console.log('Transformed data:', transformed);
+          setActivities(transformed);
+        } else {
+          console.log('No data from API, using defaults');
+        }
+      } catch (error) {
+        console.error("Error fetching activities:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActivities();
+  }, []);
+
   const bySlug = Object.fromEntries(activities.map((item) => [item.slug, item]));
   const featuredActivities = [
     bySlug["running"],

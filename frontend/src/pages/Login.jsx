@@ -1,17 +1,43 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../services/api";
 import loginBg from "../assets/login/login-bg.jpg";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login submitted", { employeeId, rememberMe });
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await auth.login(employeeId, password);
+      console.log('Login result:', result);
+      
+      if (result.error) {
+        setError(result.message || "Identifiants invalides");
+      } else if (result.token) {
+        if (rememberMe) {
+          localStorage.setItem("rememberMe", "true");
+        }
+        // Redirect to home
+        navigate("/");
+      } else {
+        setError("Login failed. Please try again.");
+      }
+    } catch (err) {
+      setError("Connection error. Please try again.");
+      console.error("Login error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -101,6 +127,13 @@ export default function Login() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {/* Error Message */}
+            {error && (
+              <div className="p-3 rounded-[14px] bg-red-50 border border-red-200 text-red-700 text-sm">
+                {error}
+              </div>
+            )}
+
             {/* Employee ID */}
             <div className="flex flex-col gap-2">
               <label className="text-[#2F343B] text-sm font-semibold leading-[21px]">
@@ -244,18 +277,21 @@ export default function Login() {
             {/* Sign In Button */}
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 w-full py-[14px] rounded-[14px] bg-[#ED8D31] text-white text-base font-semibold hover:bg-[#d47d29] active:bg-[#c06e22] transition-colors mt-1 shadow-[0_4px_14px_0_rgba(237,141,49,0.28)]"
+              disabled={loading}
+              className="flex items-center justify-center gap-2 w-full py-[14px] rounded-[14px] bg-[#ED8D31] text-white text-base font-semibold hover:bg-[#d47d29] active:bg-[#c06e22] transition-colors mt-1 shadow-[0_4px_14px_0_rgba(237,141,49,0.28)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign In
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M3.33301 7.99992H12.6663M7.99967 3.33325L12.6663 7.99992L7.99967 12.6666"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              {loading ? "Signing in..." : "Sign In"}
+              {!loading && (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3.33301 7.99992H12.6663M7.99967 3.33325L12.6663 7.99992L7.99967 12.6666"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
             </button>
           </form>
         </div>
