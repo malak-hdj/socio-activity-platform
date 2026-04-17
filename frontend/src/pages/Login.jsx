@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { auth } from "../services/api";
-=======
->>>>>>> 7ad730d40149bfbe5ff929b9666bba5503b90fc8
 import loginBg from "../assets/login/login-bg.jpg";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
@@ -16,7 +14,6 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-<<<<<<< HEAD
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -24,16 +21,15 @@ export default function Login() {
 
     try {
       const result = await auth.login(employeeId, password);
-      console.log('Login result:', result);
-      
+
       if (result.error) {
         setError(result.message || "Identifiants invalides");
       } else if (result.token) {
+        login(employeeId, result.user?.role || "employee");
         if (rememberMe) {
           localStorage.setItem("rememberMe", "true");
         }
-        // Redirect to home
-        navigate("/");
+        navigate(result.user?.role === "admin" ? "/dashboardadmin" : "/dashboard");
       } else {
         setError("Login failed. Please try again.");
       }
@@ -43,17 +39,6 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
-=======
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: appeler l'API ici, récupérer le rôle depuis la BDD
-    // Pour l'instant on login en tant qu'employee par défaut
-    login(employeeId, "employee");
-    navigate("/dashboard");
->>>>>>> 7ad730d40149bfbe5ff929b9666bba5503b90fc8
   };
 
   return (
@@ -147,7 +132,6 @@ export default function Login() {
             </div>
 
             {/* Sign In Button */}
-<<<<<<< HEAD
             <button
               type="submit"
               disabled={loading}
@@ -165,13 +149,6 @@ export default function Login() {
                   />
                 </svg>
               )}
-=======
-            <button type="submit" className="flex items-center justify-center gap-2 w-full py-[14px] rounded-[14px] bg-[#ED8D31] text-white text-base font-semibold hover:bg-[#d47d29] active:bg-[#c06e22] transition-colors mt-1 shadow-[0_4px_14px_0_rgba(237,141,49,0.28)]">
-              Sign In
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3.33301 7.99992H12.6663M7.99967 3.33325L12.6663 7.99992L7.99967 12.6666" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
->>>>>>> 7ad730d40149bfbe5ff929b9666bba5503b90fc8
             </button>
           </form>
         </div>
