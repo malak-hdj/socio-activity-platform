@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_utilisateur')->constrained('utilisateur')->onDelete('cascade');
+            $table->foreignId('id_activite')->constrained('activites')->onDelete('cascade');
+            $table->enum('statut', ['en_attente', 'confirmee', 'annulee', 'rejetee'])->default('en_attente');
+            $table->timestamp('date_inscription')->useCurrent();
+            $table->timestamp('date_confirmation')->nullable();
+            $table->text('observations')->nullable();
             $table->timestamps();
         });
     }

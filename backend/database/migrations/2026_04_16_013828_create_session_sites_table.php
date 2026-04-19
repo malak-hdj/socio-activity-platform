@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('session_sites', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_session')->constrained('sessions')->onDelete('cascade');
+            $table->foreignId('id_site')->constrained('sites')->onDelete('cascade');
+            $table->timestamp('date_debut')->nullable();
+            $table->timestamp('date_fin')->nullable();
+            $table->integer('nb_places')->default(0);
+            $table->integer('nb_places_disponibles')->default(0);
             $table->timestamps();
         });
     }

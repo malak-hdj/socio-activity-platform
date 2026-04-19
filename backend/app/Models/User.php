@@ -40,30 +40,15 @@ class User extends Authenticatable
         ];
     }
 
-    // Relations
-    public function inscriptions()
-    {
-        return $this->hasMany(Models\Inscription::class, 'id_utilisateur');
-    }
+    public function inscriptions() { return $this->hasMany(Inscription::class, 'id_utilisateur'); }
+    public function documents() { return $this->hasMany(Document::class, 'id_utilisateur'); }
+    public function participations() { return $this->hasMany(Participation::class, 'id_utilisateur'); }
+    public function choixSites() { return $this->hasMany(ChoixSite::class, 'id_utilisateur'); }
+    public function certificats() { return $this->hasMany(Certificat::class, 'id_utilisateur'); }
+    public function idees() { return $this->hasMany(Idee::class, 'id_utilisateur'); }
+    public function notifications() { return $this->hasMany(Notification::class, 'id_utilisateur'); }
+    public function auditLogs() { return $this->hasMany(AuditLog::class, 'id_utilisateur'); }
+    public function historiqueStatuts() { return $this->hasMany(HistoriqueStatutInscription::class, 'modifie_par'); }
+    public function reponsesSondages() { return $this->hasMany(ReponseSondage::class, 'id_utilisateur'); }
 
-    public function documents()
-    {
-        return $this->hasMany(Models\Document::class, 'id_utilisateur');
-    }
-
-    public function participations()
-    {
-        return $this->hasMany(Models\Participation::class, 'id_utilisateur');
-    }
-
-    public function idees()
-    {
-        return $this->hasMany(Models\Idee::class, 'id_utilisateur');
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(Models\Notification::class, 'id_utilisateur');
-    }
 }
-

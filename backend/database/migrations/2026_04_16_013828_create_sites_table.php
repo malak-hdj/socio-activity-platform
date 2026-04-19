@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->string('nom')->unique();
+            $table->text('adresse')->nullable();
+            $table->string('ville')->nullable();
+            $table->string('wilaya')->nullable();
+            $table->integer('capacite')->default(0);
+            $table->text('description')->nullable();
+            $table->boolean('actif')->default(true);
             $table->timestamps();
         });
     }

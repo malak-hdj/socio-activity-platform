@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('idees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_utilisateur')->constrained('utilisateur')->onDelete('cascade');
+            $table->string('titre');
+            $table->text('description');
+            $table->text('justification')->nullable();
+            $table->enum('categorie', ['activite', 'site', 'processus', 'autre'])->default('autre');
+            $table->enum('statut', ['soumise', 'en_cours_examen', 'acceptee', 'rejetee'])->default('soumise');
+            $table->integer('likes')->default(0);
+            $table->text('commentaires_admin')->nullable();
             $table->timestamps();
         });
     }

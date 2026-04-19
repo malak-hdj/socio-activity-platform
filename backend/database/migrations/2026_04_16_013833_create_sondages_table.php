@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('sondages', function (Blueprint $table) {
             $table->id();
+            $table->string('titre');
+            $table->text('description')->nullable();
+            $table->foreignId('id_activite')->nullable()->constrained('activites')->onDelete('set null');
+            $table->enum('type', ['choix_multiples', 'choix_unique', 'texte_libre', 'evaluation'])->default('choix_multiples');
+            $table->timestamp('date_debut');
+            $table->timestamp('date_fin');
+            $table->integer('nb_reponses')->default(0);
+            $table->boolean('anonyme')->default(true);
+            $table->text('options')->nullable(); // JSON
             $table->timestamps();
         });
     }

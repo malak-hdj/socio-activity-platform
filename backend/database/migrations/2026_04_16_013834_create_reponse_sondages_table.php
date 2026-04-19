@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('reponse_sondages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_sondage')->constrained('sondages')->onDelete('cascade');
+            $table->foreignId('id_utilisateur')->nullable()->constrained('utilisateur')->onDelete('set null');
+            $table->text('reponse'); // JSON ou texte
             $table->timestamps();
+            $table->unique(['id_sondage', 'id_utilisateur']);
         });
     }
 

@@ -33,6 +33,47 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function profile()
+    {
+        try {
+            $user = auth()->user();
+            if (!$user) {
+                return response()->json(['message' => 'Non authentifié'], 401);
+            }
+
+            return response()->json($user);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            if (!$user) {
+                return response()->json(['message' => 'Non authentifié'], 401);
+            }
+
+            $validated = $request->validate([
+                'nom' => 'sometimes|string|max:100',
+                'prenom' => 'sometimes|string|max:100',
+                'email' => 'sometimes|email|unique:utilisateur,email,' . $user->id,
+                'adresse' => 'sometimes|string|max:255',
+                'numero_securite_soc' => 'sometimes|string|max:50',
+            ]);
+
+            $user->update($validated);
+
+            return response()->json([
+                'message' => 'Profil mis à jour',
+                'user' => $user,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);

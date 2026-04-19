@@ -9,6 +9,19 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TirageController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ChoixSiteController;
+use App\Http\Controllers\Api\ResultatTirageController;
+use App\Http\Controllers\Api\TirageAuSortController;
+use App\Http\Controllers\Api\HistoriqueStatutInscriptionController;
+use App\Http\Controllers\Api\ParticipationController;
+use App\Http\Controllers\Api\CertificatController;
+use App\Http\Controllers\Api\RemplacementSuppleantController;
+use App\Http\Controllers\Api\NoteOfficielController;
+use App\Http\Controllers\Api\AuditLogController;
+use App\Http\Controllers\Api\SondageController;
+use App\Http\Controllers\Api\ReponseSondageController;
+use App\Http\Controllers\Api\IdeeController;
+use App\Http\Controllers\Api\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,26 +63,79 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Tirage au sort (Admin only)
     Route::prefix('tirage')->group(function () {
-        Route::post('/lancer/{activiteId}', [TirageController::class, 'lancer']);
-        Route::get('/resultats/{activiteId}', [TirageController::class, 'resultats']);
-        Route::post('/confirmer-gagnants/{activiteId}', [TirageController::class, 'confirmerGagnants']);
+        Route::post('/lancer/{activiteId}', [TirageAuSortController::class, 'lancer']);
+        Route::get('/resultats/{activiteId}', [TirageAuSortController::class, 'index']);
+        Route::post('/confirmer-gagnants/{activiteId}', [TirageAuSortController::class, 'confirmerGagnants']);
     });
-    
-    // Documents
-    Route::apiResource('documents', DocumentController::class);
-    Route::post('/documents/upload', [DocumentController::class, 'upload']);
-    Route::get('/documents/activite/{activiteId}', [DocumentController::class, 'getByActivite']);
-    Route::post('/documents/{id}/valider', [DocumentController::class, 'valider']); // Admin only
-    
-    // Dashboard
-    Route::prefix('dashboard')->group(function () {
-        Route::get('/stats', [DashboardController::class, 'getStats']);
-        Route::get('/participation-history', [DashboardController::class, 'participationHistory']);
-        Route::get('/documents-status', [DashboardController::class, 'documentsStatus']);
-        Route::get('/surveys', [DashboardController::class, 'surveys']);
-        Route::get('/ideas', [DashboardController::class, 'ideas']);
-        Route::post('/ideas', [DashboardController::class, 'submitIdea']);
-        Route::get('/announcements', [DashboardController::class, 'announcements']);
+
+    // Choix de sites
+    Route::apiResource('choix-sites', ChoixSiteController::class);
+    Route::get('/choix-sites/activite/{activiteId}', [ChoixSiteController::class, 'sitesDisponibles']);
+
+    // Résultats de tirage
+    Route::apiResource('resultat-tirages', ResultatTirageController::class);
+    Route::get('/resultat-tirages/activite/{activiteId}', [ResultatTirageController::class, 'parActivite']);
+    Route::post('/resultat-tirages/{id}/confirmer', [ResultatTirageController::class, 'confirmer']);
+
+    // Historique des statuts d'inscription
+    Route::prefix('historique-statuts')->group(function () {
+        Route::get('/inscription/{inscriptionId}', [HistoriqueStatutInscriptionController::class, 'index']);
+        Route::post('/', [HistoriqueStatutInscriptionController::class, 'store']);
+        Route::get('/utilisateur/{userId}/activite/{activiteId}', [HistoriqueStatutInscriptionController::class, 'parUtilisateurActivite']);
+    });
+
+    // Participations
+    Route::apiResource('participations', ParticipationController::class);
+    Route::get('/participations/utilisateur/{userId}', [ParticipationController::class, 'parUtilisateur']);
+    Route::get('/participations/activite/{activiteId}', [ParticipationController::class, 'parActivite']);
+
+    // Certificats
+    Route::apiResource('certificats', CertificatController::class);
+    Route::get('/certificats/utilisateur/{userId}', [CertificatController::class, 'parUtilisateur']);
+    Route::post('/certificats/{id}/generer', [CertificatController::class, 'generer']);
+
+    // Remplacements de suppléants
+    Route::apiResource('remplacements-suppleants', RemplacementSuppleantController::class);
+    Route::post('/remplacements-suppleants/{id}/confirmer', [RemplacementSuppleantController::class, 'confirmer']);
+    Route::get('/remplacements-suppleants/activite/{activiteId}', [RemplacementSuppleantController::class, 'parActivite']);
+
+    // Notes officielles
+    Route::apiResource('notes-officielles', NoteOfficielController::class);
+    Route::get('/notes-officielles/categorie/{categorie}', [NoteOfficielController::class, 'parCategorie']);
+
+    // Audit logs (Admin only)
+    Route::middleware('admin')->prefix('audit-logs')->group(function () {
+        Route::get('/', [AuditLogController::class, 'index']);
+        Route::get('/{id}', [AuditLogController::class, 'show']);
+        Route::get('/modele/{modele}/{idModele}', [AuditLogController::class, 'parModele']);
+        Route::get('/utilisateur/{userId}', [AuditLogController::class, 'parUtilisateur']);
+    });
+
+    // Sondages
+    Route::apiResource('sondages', SondageController::class);
+    Route::get('/sondages/en-cours', [SondageController::class, 'enCours']);
+
+    // Réponses aux sondages
+    Route::post('/sondages/{sondageId}/repondre', [ReponseSondageController::class, 'store']);
+    Route::get('/sondages/{sondageId}/reponses', [ReponseSondageController::class, 'sondage']);
+    Route::get('/mes-reponses', [ReponseSondageController::class, 'utilisateur']);
+    Route::put('/reponses-sondages/{id}', [ReponseSondageController::class, 'update']);
+    Route::delete('/reponses-sondages/{id}', [ReponseSondageController::class, 'destroy']);
+
+    // Idées
+    Route::apiResource('idees', IdeeController::class);
+    Route::post('/idees/{id}/liker', [IdeeController::class, 'liker']);
+    Route::post('/idees/{id}/changer-statut', [IdeeController::class, 'changerStatut']);
+
+    // Notifications
+    Route::prefix('notifications')->group(function () {
+        Route::get('/', [NotificationController::class, 'index']);
+        Route::get('/non-lues', [NotificationController::class, 'nonLues']);
+        Route::post('/{id}/lue', [NotificationController::class, 'lue']);
+        Route::post('/marquer-tout-lu', [NotificationController::class, 'toutesLues']);
+        Route::delete('/{id}', [NotificationController::class, 'destroy']);
+        Route::delete('/', [NotificationController::class, 'toutesSupprimer']);
+        Route::post('/en-masse', [NotificationController::class, 'enMasse']);
     });
     
 });

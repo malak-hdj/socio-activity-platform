@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('remplacement_suppleants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_utilisateur_titulaire')->constrained('utilisateur')->onDelete('cascade');
+            $table->foreignId('id_utilisateur_remplacant')->constrained('utilisateur')->onDelete('cascade');
+            $table->foreignId('id_activite')->constrained('activites')->onDelete('cascade');
+            $table->enum('raison', ['retrait_titulaire', 'promotion_suppleant', 'autre'])->default('autre');
+            $table->text('motif')->nullable();
+            $table->timestamp('date_remplacement')->nullable();
+            $table->boolean('confirme')->default(false);
             $table->timestamps();
         });
     }

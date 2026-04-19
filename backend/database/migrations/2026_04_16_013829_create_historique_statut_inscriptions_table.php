@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('historique_statut_inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_inscription')->constrained('inscriptions')->onDelete('cascade');
+            $table->enum('ancien_statut', ['en_attente', 'confirmee', 'annulee', 'rejetee'])->nullable();
+            $table->enum('nouveau_statut', ['en_attente', 'confirmee', 'annulee', 'rejetee'])->nullable();
+            $table->text('raison')->nullable();
+            $table->foreignId('modifie_par')->nullable()->constrained('utilisateur')->onDelete('set null');
             $table->timestamps();
         });
     }

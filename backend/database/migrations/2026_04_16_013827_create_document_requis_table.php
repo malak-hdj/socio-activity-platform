@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('document_requis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_activite')->constrained('activites')->onDelete('cascade');
+            $table->string('nom_document');
+            $table->boolean('obligatoire')->default(true);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
